@@ -38,7 +38,7 @@ public class HomePage {
     public void setCityHotel(String cityName) throws InterruptedException {
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
-//        Thread.sleep(5000);
+        Thread.sleep(5000);
         searchCityInput.sendKeys(Keys.ENTER);
     }
 
