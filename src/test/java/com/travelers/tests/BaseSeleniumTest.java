@@ -12,7 +12,8 @@ public class BaseSeleniumTest {
     @BeforeTest
     public void setUp() {
         System.out.println("Before test");
-        String driverPath = "C:\\Users\\barts\\IdeaProjects\\seleniumTestPierwszy\\src\\main\\resources\\executables\\drivers\\chromedriver.exe";
+//        String driverPath = "C:\\Users\\barts\\IdeaProjects\\seleniumTestPierwszy\\src\\main\\resources\\executables\\drivers\\chromedriver.exe";
+        String driverPath = "C:\\Users\\Tarble\\seleniumTestPierwszy\\src\\main\\resources\\executables\\drivers\\chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
