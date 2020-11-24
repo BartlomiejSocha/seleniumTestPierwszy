@@ -1,3 +1,5 @@
+package firstests;
+
 import com.travelers.tests.BaseSeleniumTest;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;

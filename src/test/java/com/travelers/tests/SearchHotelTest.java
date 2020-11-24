@@ -5,7 +5,6 @@ import com.travelers.pages.ResultPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.xml.transform.Result;
 import java.util.List;
 
 public class SearchHotelTest extends BaseSeleniumTest {
@@ -22,6 +21,21 @@ public class SearchHotelTest extends BaseSeleniumTest {
                 .addChild()
                 .performSearch();
 
+        /*Annotations
+        Before Suite
+            before test
+                before class
+                    before method
+                        first test
+                    after method
+                    before method
+                        second test
+                    after method
+                after class
+              test z drugiej klasy
+            after test
+        after Suite
+        */
         ResultPage resultPage = new ResultPage(driver);
 
         List<String> hotelNames = resultPage.getHotelNames();
