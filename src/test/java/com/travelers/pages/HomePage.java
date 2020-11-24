@@ -1,12 +1,16 @@
 package com.travelers.pages;
 
+import com.travelers.helpers.SeleniumHelper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HomePage {
 
@@ -31,14 +35,31 @@ public class HomePage {
     @FindBy(id = "adultPlusBtn")
     private WebElement adultPlusBtn;
 
+    @FindBy(xpath = "//button[text()=' Search']")
+    private WebElement searchButton;
+
+    @FindBy(xpath = "//table[@class='bgwhite table table-striped']")
+    private  WebElement resultsTable;
+
+    @FindBy(xpath = "//div[@class='select2-result-label']")
+    private WebElement selectResult;
+
+    private SeleniumHelper helper;
+
+    private WebDriver driver;
+
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.helper = new SeleniumHelper(driver);
+        this.driver = driver;
     }
 
-    public void setCityHotel(String cityName) throws InterruptedException {
+    public void setCityHotel(String cityName) {
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
-        Thread.sleep(5000);
+/*        By locationLabel = By.xpath("//div[@class='select2-result-label']");
+        helper.waitForElementToBeDisplayed(locationLabel);*/
+        helper.waitForElementToBeDisplayed(selectResult);
         searchCityInput.sendKeys(Keys.ENTER);
     }
 
@@ -50,7 +71,7 @@ public class HomePage {
 
     public void openTravellersModel() throws InterruptedException {
         travellersInput.click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 
     public void addAdult() {
@@ -59,6 +80,28 @@ public class HomePage {
 
     public void addChild() {
         childPlusBtn.click();
+    }
+
+    public void performSearch() throws InterruptedException {
+        searchButton.click();
+        Thread.sleep(2000);
+    }
+
+    public List<String> getHotelNames() {
+        List<String> hotelNames = new ArrayList<>();
+        List<WebElement> hotelNameWebElements = resultsTable.findElements(By.xpath("//h4//b"));
+        for (WebElement hotelNameElement : hotelNameWebElements) {
+            System.out.println(hotelNameElement.getText());
+            hotelNames.add(hotelNameElement.getText());
+        }
+        return hotelNames;
+    }
+
+    public List<String> getHotelPrices() {
+
+        List<WebElement> hotelPrices = resultsTable.findElements(By.xpath("//div[contains(@class,'price_tab')]//b"));
+        List<String> prices = hotelPrices.stream().map(element -> element.getText()).collect(Collectors.toList());
+        return prices;
     }
 
 }
