@@ -1,16 +1,11 @@
 package com.travelers.pages;
 
 import com.travelers.helpers.SeleniumHelper;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class HomePage {
 
@@ -51,34 +46,40 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public void setCityHotel(String cityName) {
+    public HomePage setCityHotel(String cityName) {
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
         helper.waitForElementToBeDisplayed(selectResult);
         searchCityInput.sendKeys(Keys.ENTER);
+        return this;
     }
 
-    public void setDateRange(String checkInDate, String checkOutDate) {
+    public HomePage setDateRange(String checkInDate, String checkOutDate) {
         checkInInput.sendKeys(checkInDate);
         checkOutInput.sendKeys(checkOutDate);
         checkOutInput.click();
+        return this;
     }
 
-    public void openTravellersModel() {
+    public HomePage openTravellersModel() {
         travellersInput.click();
         helper.waitForElementToBeDisplayed(adultPlusBtn);
+        return this;
     }
 
-    public void addAdult() {
+    public HomePage addAdult() {
         adultPlusBtn.click();
+        return this;
     }
 
-    public void addChild() {
+    public HomePage addChild() {
         childPlusBtn.click();
+        return this;
     }
 
-    public void performSearch() {
+    public HomePage performSearch() {
         searchButton.click();
+        return this;
     }
 
 }
