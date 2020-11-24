@@ -9,13 +9,14 @@ import java.util.List;
 public class SearchHotelTest extends BaseSeleniumTest {
 
     @Test
-    public void searchHotelTest() throws InterruptedException {
+    public void searchHotelTest() {
         driver.get("http://www.kurs-selenium.pl/demo/");
         HomePage homePage = new HomePage(driver);
         homePage.setCityHotel("Dubai");
         homePage.setDateRange("09/11/2021", "09/13/2021");
         homePage.openTravellersModel();
         homePage.addAdult();
+        homePage.addChild();
         homePage.addChild();
         homePage.performSearch();
 

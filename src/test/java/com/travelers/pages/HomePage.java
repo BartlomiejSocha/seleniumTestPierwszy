@@ -57,8 +57,6 @@ public class HomePage {
     public void setCityHotel(String cityName) {
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
-/*        By locationLabel = By.xpath("//div[@class='select2-result-label']");
-        helper.waitForElementToBeDisplayed(locationLabel);*/
         helper.waitForElementToBeDisplayed(selectResult);
         searchCityInput.sendKeys(Keys.ENTER);
     }
@@ -69,9 +67,9 @@ public class HomePage {
         checkOutInput.click();
     }
 
-    public void openTravellersModel() throws InterruptedException {
+    public void openTravellersModel() {
         travellersInput.click();
-        Thread.sleep(3000);
+        helper.waitForElementToBeDisplayed(adultPlusBtn);
     }
 
     public void addAdult() {
@@ -82,13 +80,13 @@ public class HomePage {
         childPlusBtn.click();
     }
 
-    public void performSearch() throws InterruptedException {
+    public void performSearch() {
         searchButton.click();
-        Thread.sleep(2000);
     }
 
     public List<String> getHotelNames() {
         List<String> hotelNames = new ArrayList<>();
+        helper.waitForListOfWebElements(resultsTable.findElements(By.xpath(".//h4//b")));
         List<WebElement> hotelNameWebElements = resultsTable.findElements(By.xpath("//h4//b"));
         for (WebElement hotelNameElement : hotelNameWebElements) {
             System.out.println(hotelNameElement.getText());
