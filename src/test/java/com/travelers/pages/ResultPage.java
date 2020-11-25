@@ -31,7 +31,7 @@ public class ResultPage {
         helper.waitForListOfWebElements(resultsTable.findElements(By.xpath(".//h4//b")));
         List<WebElement> hotelNameWebElements = resultsTable.findElements(By.xpath(".//h4//b"));
         for (WebElement hotelNameElement : hotelNameWebElements) {
-            System.out.println(hotelNameElement.getText());
+/*            System.out.println(hotelNameElement.getText());*/
             hotelNames.add(hotelNameElement.getText());
         }
         return hotelNames;
