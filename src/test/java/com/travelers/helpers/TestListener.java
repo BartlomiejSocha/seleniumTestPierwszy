@@ -1,9 +1,11 @@
-package annotations;
+package com.travelers.helpers;
 
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import java.io.IOException;
 
 public class TestListener implements ITestListener {
 
@@ -19,7 +21,14 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        System.out.println("On test failure");
+        try {
+            System.out.println("On test failure");
+            SeleniumHelper.takeScreenshot(DriverFactory.getDriver(DriverType.CHROME));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchDriverException e) {
+        e.printStackTrace();
+    }
     }
 
     @Override

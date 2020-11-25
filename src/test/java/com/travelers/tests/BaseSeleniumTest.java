@@ -1,7 +1,9 @@
 package com.travelers.tests;
 
+import com.travelers.helpers.DriverFactory;
+import com.travelers.helpers.DriverType;
+import com.travelers.helpers.NoSuchDriverException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -10,14 +12,9 @@ public class BaseSeleniumTest {
     protected WebDriver driver;
 
     @BeforeTest
-    public void setUp() {
+    public void setUp() throws NoSuchDriverException {
         System.out.println("Before test");
-//        String driverPath = "C:\\Users\\barts\\IdeaProjects\\seleniumTestPierwszy\\src\\main\\resources\\executables\\drivers\\chromedriver.exe";
-        String driverPath = "C:\\Users\\Tarble\\seleniumTestPierwszy\\src\\main\\resources\\executables\\drivers\\chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-//        driver.get("C://Users//barts//OneDrive//Pulpit//kurs//wyklad54//Test.html");
+        driver = DriverFactory.getDriver(DriverType.CHROME);
     }
 
     @AfterTest
