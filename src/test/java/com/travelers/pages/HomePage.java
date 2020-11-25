@@ -77,9 +77,9 @@ public class HomePage {
         return this;
     }
 
-    public HomePage performSearch() {
+    public ResultPage performSearch() {
         searchButton.click();
-        return this;
+        return new ResultPage(driver);
     }
 
 }

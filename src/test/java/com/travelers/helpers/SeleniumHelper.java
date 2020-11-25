@@ -49,6 +49,6 @@ public class SeleniumHelper {
         File screenshotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         File destinationFile = new File("src/main/resources/" + LocalTime.now().getNano() + ".png");
         Files.copy(screenshotFile.toPath(), destinationFile.toPath());
-
     }
+
 }

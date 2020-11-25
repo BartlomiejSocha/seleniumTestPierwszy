@@ -56,5 +56,6 @@ public class ExcelHelper {
         readExcelFileFirst();
         Object[][] data = readExcelFile(new File("src//main//resources//files//Dane.xlsx"));
         System.out.println(data[0][0]);
+        System.out.println(data[0][8]);
     }*/
 }

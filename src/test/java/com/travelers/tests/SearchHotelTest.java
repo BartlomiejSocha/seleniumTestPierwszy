@@ -21,7 +21,8 @@ public class SearchHotelTest extends BaseSeleniumTest {
                                 String sHotel, String sPrice, String tHotel, String tPrice) {
         driver.get("http://www.kurs-selenium.pl/demo/");
         HomePage homePage = new HomePage(driver);
-        homePage.setCityHotel(city)
+        ResultPage resultPage = homePage
+                .setCityHotel(city)
                 .setDateRange(checkInDate, checkOutDate)
                 .openTravellersModel()
                 .addAdult()
@@ -44,8 +45,6 @@ public class SearchHotelTest extends BaseSeleniumTest {
             after test
         after Suite
         */
-        ResultPage resultPage = new ResultPage(driver);
-
         List<String> hotelNames = resultPage.getHotelNames();
         Assert.assertEquals(fHotel,hotelNames.get(0));
         Assert.assertEquals(sHotel,hotelNames.get(1));
