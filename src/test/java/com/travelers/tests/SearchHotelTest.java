@@ -1,5 +1,6 @@
 package com.travelers.tests;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.travelers.helpers.ExcelHelper;
 import com.travelers.helpers.TestListener;
 import com.travelers.pages.HomePage;
@@ -18,18 +19,21 @@ public class SearchHotelTest extends BaseSeleniumTest {
 
     @Test(dataProvider = "getData")
     public void searchHotelTest(String city, String checkInDate, String checkOutDate, String fHotel, String fPrice,
-                                String sHotel, String sPrice, String tHotel, String tPrice) {
+                                String sHotel, String sPrice, String tHotel, String tPrice) throws IOException {
+        ExtentTest test = reports.createTest("Search Hotel test");
         driver.get("http://www.kurs-selenium.pl/demo/");
         HomePage homePage = new HomePage(driver);
-        ResultPage resultPage = homePage
-                .setCityHotel(city)
+
+        test.info("On PHP Travelers Home Page", getScreenshot());
+        homePage.setCityHotel(city)
                 .setDateRange(checkInDate, checkOutDate)
-                .openTravellersModel()
+                .openTravellersModal()
                 .addAdult()
                 .addChild()
-                .addChild()
-                .performSearch();
-
+                .addChild();
+        String infoText = "Before performing search for city %s check in %s and check out %s";
+        test.info(String.format(infoText, city, checkInDate, checkOutDate), getScreenshot());
+        ResultPage resultPage = homePage.performSearch();
         /*Annotations
         Before Suite
             before test
@@ -45,6 +49,8 @@ public class SearchHotelTest extends BaseSeleniumTest {
             after test
         after Suite
         */
+
+        test.info("Checking hotel names and prices", getScreenshot());
         List<String> hotelNames = resultPage.getHotelNames();
         Assert.assertEquals(fHotel,hotelNames.get(0));
         Assert.assertEquals(sHotel,hotelNames.get(1));
@@ -62,7 +68,7 @@ public class SearchHotelTest extends BaseSeleniumTest {
     public Object[][] getData() {
         Object[][] data = null;
         try {
-            data = ExcelHelper.readExcelFile(new File("src//main//resources//files//Dane.xlsx"));
+            data = ExcelHelper.readExcelFile(new File("src//test//resources//files//Dane.xlsx"));
         } catch (IOException e) {
             e.printStackTrace();
         }

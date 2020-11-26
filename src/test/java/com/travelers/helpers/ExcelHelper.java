@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class ExcelHelper {
 
     public static void readExcelFileFirst() throws IOException {
-        InputStream inputStream = new FileInputStream("src//main//resources//files//Dane.xlsx");
+        InputStream inputStream = new FileInputStream("src//test//resources//files//Dane.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         /*HSSFWorkbook workbook = new HSSFWorkbook(inputStream); //dla .xls */
 
@@ -54,7 +54,7 @@ public class ExcelHelper {
 
 /*    public static void main(String[] args) throws IOException {
         readExcelFileFirst();
-        Object[][] data = readExcelFile(new File("src//main//resources//files//Dane.xlsx"));
+        Object[][] data = readExcelFile(new File("src//test//resources//files//Dane.xlsx"));
         System.out.println(data[0][0]);
         System.out.println(data[0][8]);
     }*/
